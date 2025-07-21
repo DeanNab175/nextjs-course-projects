@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@heroui/shared-utils'
+  - '@prisma/engines'
+  - '@tailwindcss/oxide'
+  - prisma
+  - sharp
+  - unrs-resolver
