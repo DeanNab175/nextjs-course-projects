@@ -26,6 +26,7 @@ async function SnippetShowPage(props: SnippetShowPageProps) {
 
   return (
     <div>
+      <Link href="/" className="p-2 border rounded">Back</Link>
       <div className="flex m-4 justify-between items-center">
         <h1 className="text-xl font-bold">{snippet.title}</h1>
         <div className="flex gap-4">

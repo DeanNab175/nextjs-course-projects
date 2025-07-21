@@ -31,13 +31,13 @@ export async function createSnippet(
 
     if (typeof title !== "string" || title.length < 3) {
       return {
-        message: "Title must be longer.",
+        message: "Title must be atleast 2 characters long.",
       };
     }
 
     if (typeof code !== "string" || code.length < 10) {
       return {
-        message: "Code must be longer.",
+        message: "Code must be atleast 10 characters long.",
       };
     }
 
