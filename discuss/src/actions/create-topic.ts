@@ -1,6 +1,5 @@
 "use server";
 
-import { error } from "console";
 import { z } from "zod";
 
 const createTopicShema = z.object({
@@ -10,7 +9,7 @@ const createTopicShema = z.object({
     .regex(/^[a-z-]+$/, {
       message: "Must be lowercase letters or dashes without spaces.",
     }),
-  description: z.string().min(1, "Description is required"),
+  description: z.string().min(10, "Description is required"),
 });
 
 interface CreateTopicFormState {
