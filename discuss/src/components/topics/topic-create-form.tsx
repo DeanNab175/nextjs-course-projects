@@ -1,7 +1,7 @@
 "use client";
 
 // import { useFormState } from "react-dom";
-import { FormEvent, useActionState } from "react";
+import { useActionState } from "react";
 import {
   Input,
   Button,
@@ -18,8 +18,6 @@ export default function TopicCreateForm() {
   const [formState, formAction, pending] = useActionState(actions.createTopic, {
     errors: {},
   });
-
-  console.log({ formState, formAction });
 
   return (
     <Popover placement="left">
@@ -57,8 +55,8 @@ export default function TopicCreateForm() {
               </div>
             ) : null}
 
-            <Button type="submit" disabled={pending}>
-              Submit
+            <Button type="submit" disabled={pending} isLoading={pending}>
+              Save
             </Button>
           </div>
         </Form>

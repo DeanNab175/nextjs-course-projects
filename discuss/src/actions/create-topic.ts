@@ -11,7 +11,7 @@ import paths from "@/paths";
 const createTopicShema = z.object({
   name: z
     .string()
-    .min(3)
+    .min(3, "Name must be at least 3 characters long")
     .regex(/^[a-z-]+$/, {
       message: "Must be lowercase letters or dashes without spaces.",
     }),
@@ -30,7 +30,7 @@ export async function createTopic(
   formState: CreateTopicFormState,
   formData: FormData
 ): Promise<CreateTopicFormState> {
-  console.log("Creating topic...", formData);
+  // await new Promise((resolve) => setTimeout(resolve, 2500));
 
   const result = createTopicShema.safeParse({
     name: formData.get("name"),
