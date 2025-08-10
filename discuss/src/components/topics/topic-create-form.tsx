@@ -1,7 +1,7 @@
 "use client";
 
 // import { useFormState } from "react-dom";
-import { useActionState } from "react";
+import { FormEvent, useActionState } from "react";
 import {
   Input,
   Button,
@@ -9,14 +9,17 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  Form,
 } from "@heroui/react";
 import * as actions from "@/actions";
 
 export default function TopicCreateForm() {
-  //   const [formState, action] = useFormState(actions.createTopic, { errors: {} });
-  const [formState, action] = useActionState(actions.createTopic, {
+  // const [formState, action] = useFormState(actions.createTopic, { errors: {} });
+  const [formState, formAction, pending] = useActionState(actions.createTopic, {
     errors: {},
   });
+
+  console.log({ formState, formAction });
 
   return (
     <Popover placement="left">
@@ -24,7 +27,11 @@ export default function TopicCreateForm() {
         <Button color="primary">Create a Topic</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <form action={action}>
+        <Form
+          action={formAction}
+          validationErrors={formState.errors}
+          validationBehavior="aria"
+        >
           <div className="flex flex-col gap-4 p-4 w-80">
             <h3 className="text-lg">Create a Topic</h3>
             <Input
@@ -43,9 +50,18 @@ export default function TopicCreateForm() {
               isInvalid={!!formState.errors.description}
               errorMessage={formState.errors.description?.join(", ")}
             />
-            <Button type="submit">Submit</Button>
+
+            {formState.errors._form ? (
+              <div className="rounded p-2 bg-red-200 border border-red-400">
+                {formState.errors._form.join(", ")}
+              </div>
+            ) : null}
+
+            <Button type="submit" disabled={pending}>
+              Submit
+            </Button>
           </div>
-        </form>
+        </Form>
       </PopoverContent>
     </Popover>
   );
