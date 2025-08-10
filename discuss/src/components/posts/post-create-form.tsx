@@ -12,10 +12,17 @@ import {
 } from "@heroui/react";
 import * as actions from "@/actions";
 
-function PostCreateForm() {
-  //   const [formState, formAction, pending] = useActionState(actions.createPost, {
-  //     errors: {},
-  //   });
+interface PostCreateFormProps {
+  slug: string;
+}
+
+function PostCreateForm({ slug }: PostCreateFormProps) {
+  const [formState, formAction, pending] = useActionState(
+    actions.createPost.bind(null, slug),
+    {
+      errors: {},
+    }
+  );
 
   return (
     <Popover placement="left">
@@ -24,8 +31,8 @@ function PostCreateForm() {
       </PopoverTrigger>
       <PopoverContent>
         <Form
-          //   action={formAction}
-          //   validationErrors={formState.errors}
+          action={formAction}
+          validationErrors={formState.errors}
           validationBehavior="aria"
         >
           <div className="flex flex-col gap-4 p-4 w-80">
@@ -35,30 +42,26 @@ function PostCreateForm() {
               label="Title"
               labelPlacement="outside"
               placeholder="Title"
-              //   isInvalid={!!formState.errors.title}
-              //   errorMessage={formState.errors.title?.join(", ")}
+              isInvalid={!!formState.errors.title}
+              errorMessage={formState.errors.title?.join(", ")}
             />
-            <Input
+            <Textarea
               name="content"
               label="Content"
               labelPlacement="outside"
               placeholder="Content"
-              //   isInvalid={!!formState.errors.content}
-              //   errorMessage={formState.errors.content?.join(", ")}
+              isInvalid={!!formState.errors.content}
+              errorMessage={formState.errors.content?.join(", ")}
             />
 
-            {/* {formState.errors._form ? (
+            {formState.errors._form ? (
               <div className="rounded p-2 bg-red-200 border border-red-400">
                 {formState.errors._form.join(", ")}
               </div>
-            ) : null} */}
+            ) : null}
 
-            <Button
-              type="submit"
-              // disabled={pending}
-              // isLoading={pending}
-            >
-              Submit
+            <Button type="submit" disabled={pending} isLoading={pending}>
+              Create post
             </Button>
           </div>
         </Form>

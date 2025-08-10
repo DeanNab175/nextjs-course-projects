@@ -14,7 +14,7 @@ async function TopicShowPage({ params }: TopicShowPageProps) {
       </div>
 
       <div>
-        <PostCreateForm />
+        <PostCreateForm slug={slug} />
       </div>
     </div>
   );
